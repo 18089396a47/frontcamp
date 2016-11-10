@@ -1,0 +1,18 @@
+{
+    "ecmaFeatures": {
+        "modules": true
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "extends": "airbnb",
+    "rules": {
+        "indent": ["error", 4],
+        "no-use-before-define": ["off", { "functions": true }],
+        "import/no-unresolved": ["error", { ignore: ['\.styl$'] }]
+    },
+    "globals": {
+        "require": true
+    }
+}
