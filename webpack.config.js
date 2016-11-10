@@ -20,16 +20,25 @@ module.exports = {
             test: /\.styl$/,
             loader: 'style-loader!css-loader!stylus-loader'
         }, {
+            test: /\.json$/,
+            loader: 'json'
+        }, {
             test: /\.js$/,
             loader: "eslint-loader",
             exclude: /node_modules/
         }, {
             test: /\.svg$/,
             loader: 'svg-url-loader'
+        }, {
+            test: /.*\.(gif|png|jpe?g|svg)$/i,
+            loaders: [
+              'file?hash=sha512&digest=hex&name=[hash].[ext]',
+              'image-webpack'
+            ]
         }]
     },
     resolve: {
-        extensions: ['', '.css', '.js', '.styl', 'index.js']
+        extensions: ['', '.css', '.js', '.styl', '.json', 'index.js']
     },
     plugins: [
         new OpenBrowserPlugin({
