@@ -1,6 +1,6 @@
-import { DEFAULT_IMAGE } from '../constants';
+import { DEFAULT_IMAGE, DATE_OPTIONS } from '../constants';
 
-function buildNode({ multimedia: { 1: imagePreview = DEFAULT_IMAGE }, url, title }) {
+function buildNode({ urlToImage = DEFAULT_IMAGE, url, title, publishedAt }) {
     if (!url || !title) {
         return undefined;
     }
@@ -8,10 +8,11 @@ function buildNode({ multimedia: { 1: imagePreview = DEFAULT_IMAGE }, url, title
     const image = document.createElement('img');
     const info = document.createElement('div');
     const href = document.createElement('a');
+    const date = document.createElement('div');
 
     node.classList.add('news-item');
 
-    image.src = imagePreview.url;
+    image.src = urlToImage;
     image.classList.add('news-image');
 
     info.classList.add('news-info');
@@ -20,7 +21,11 @@ function buildNode({ multimedia: { 1: imagePreview = DEFAULT_IMAGE }, url, title
     href.innerText = title;
     href.classList.add('news-title');
 
+    date.innerText = new Date(publishedAt).toLocaleString('en-EN', DATE_OPTIONS);
+    date.classList.add('news-date');
+
     info.appendChild(href);
+    info.appendChild(date);
     node.appendChild(image);
     node.appendChild(info);
     return node;
@@ -32,6 +37,6 @@ function animateNews(news, nodes) {
     });
 }
 
-export default function render(news, { results } = {}) {
-    animateNews(news, results.map(buildNode));
+export default function render(news, { articles } = {}) {
+    animateNews(news, articles.map(buildNode));
 }

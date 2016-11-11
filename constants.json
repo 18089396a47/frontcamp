@@ -1,8 +1,15 @@
 {
-  "URL": "https://api.nytimes.com/svc/topstories/v2/home.json",
-  "KEY": "a5274de2464646e89fe3e786ee943578",
+  "URL": "https://newsapi.org/v1/articles",
+  "KEY": "d96ee725d4df48c6a46d47961ad66a01",
   "DEFAULT_IMAGE": {
     "url": "http://deali.ru/wp-content/uploads/2016/02/no-image-150x150.png",
     "caption": "No caption"
+  },
+  "DATE_OPTIONS": {
+    "year": "numeric",
+    "month": "numeric",
+    "day": "numeric",
+    "hour": "numeric",
+    "minute": "numeric"
   }
 }
