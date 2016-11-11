@@ -1,4 +1,4 @@
-const { DEFAULT_IMAGE } = require('../constants');
+import { DEFAULT_IMAGE } from '../constants';
 
 function buildNode({ multimedia: { 1: imagePreview = DEFAULT_IMAGE }, url, title }) {
     if (!url || !title) {
@@ -32,6 +32,6 @@ function animateNews(news, nodes) {
     });
 }
 
-module.exports = function render(news, { results } = {}) {
+export default function render(news, { results } = {}) {
     animateNews(news, results.map(buildNode));
-};
+}

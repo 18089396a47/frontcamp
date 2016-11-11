@@ -1,6 +1,6 @@
-const { URL, KEY } = require('../constants');
+import { URL, KEY } from '../constants';
 
 const request = new Request(`${URL}?api-key=${KEY}`);
 
-module.exports = Promise.resolve(fetch(request))
+export default Promise.resolve(fetch(request))
     .then(response => response.json());

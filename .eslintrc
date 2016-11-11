@@ -10,7 +10,8 @@
     "rules": {
         "indent": ["error", 4],
         "no-use-before-define": ["off", { "functions": true }],
-        "import/no-unresolved": ["error", { ignore: ['\.styl$'] }]
+        "import/no-unresolved": [2, { ignore: ['\.styl$'] }],
+        "import/extensions": [0]
     },
     "globals": {
         "require": true

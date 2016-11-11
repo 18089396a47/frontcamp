@@ -1,10 +1,11 @@
 /* eslint no-console: 0 */
-require('reset-css');// babel required
-require('./styles');
-require('./index.html');
+/* eslint import/no-unresolved: 0 */
+import 'reset-css';
+import './styles';
+import './index.html';
 
-const firstLoad = require('./scripts/newsLoader');
-const render = require('./scripts/render');
+import firstLoad from './scripts/newsLoader';
+import render from './scripts/render';
 
 window.onload = () => {
     const news = document.getElementsByClassName('news-container')[0];

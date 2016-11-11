@@ -24,8 +24,8 @@ module.exports = {
             loader: 'json'
         }, {
             test: /\.js$/,
-            loader: "eslint-loader",
-            exclude: /node_modules/
+            exclude: /(node_modules|bower_components)/,
+            loaders: ['babel?presets[]=es2015', 'eslint-loader']
         }, {
             test: /\.svg$/,
             loader: 'svg-url-loader'

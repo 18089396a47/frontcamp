@@ -51,22 +51,21 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
 	/* eslint no-console: 0 */
-	__webpack_require__(2);// babel required
+	__webpack_require__(2); // babel required
 	__webpack_require__(6);
 	__webpack_require__(9);
 
-	const firstLoad = __webpack_require__(10);
-	const render = __webpack_require__(12);
+	var firstLoad = __webpack_require__(10);
+	var render = __webpack_require__(12);
 
-	window.onload = () => {
-	    const news = document.getElementsByClassName('news-container')[0];
+	window.onload = function () {
+	    var news = document.getElementsByClassName('news-container')[0];
 
-	    firstLoad
-	        .then(render.bind(this, news))
-	        .catch(console.log);
+	    firstLoad.then(render.bind(undefined, news)).catch(console.log);
 	};
-
 
 /***/ },
 /* 2 */
@@ -472,13 +471,17 @@
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	const { URL, KEY } = __webpack_require__(11);
+	'use strict';
 
-	const request = new Request(`${URL}?api-key=${KEY}`);
+	var _require = __webpack_require__(11),
+	    URL = _require.URL,
+	    KEY = _require.KEY;
 
-	module.exports = Promise.resolve(fetch(request))
-	    .then(response => response.json());
+	var request = new Request(URL + '?api-key=' + KEY);
 
+	module.exports = Promise.resolve(fetch(request)).then(function (response) {
+	    return response.json();
+	});
 
 /***/ },
 /* 11 */
@@ -497,16 +500,24 @@
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	const { DEFAULT_IMAGE } = __webpack_require__(11);
+	'use strict';
 
-	function buildNode({ multimedia: { 1: imagePreview = DEFAULT_IMAGE }, url, title }) {
+	var _require = __webpack_require__(11),
+	    DEFAULT_IMAGE = _require.DEFAULT_IMAGE;
+
+	function buildNode(_ref) {
+	    var _ref$multimedia$ = _ref.multimedia[1],
+	        imagePreview = _ref$multimedia$ === undefined ? DEFAULT_IMAGE : _ref$multimedia$,
+	        url = _ref.url,
+	        title = _ref.title;
+
 	    if (!url || !title) {
 	        return undefined;
 	    }
-	    const node = document.createElement('li');
-	    const image = document.createElement('img');
-	    const info = document.createElement('div');
-	    const href = document.createElement('a');
+	    var node = document.createElement('li');
+	    var image = document.createElement('img');
+	    var info = document.createElement('div');
+	    var href = document.createElement('a');
 
 	    node.classList.add('news-item');
 
@@ -526,15 +537,19 @@
 	}
 
 	function animateNews(news, nodes) {
-	    nodes.forEach((node, index) => {
-	        setTimeout(() => { news.appendChild(node); }, index * 20);
+	    nodes.forEach(function (node, index) {
+	        setTimeout(function () {
+	            news.appendChild(node);
+	        }, index * 20);
 	    });
 	}
 
-	module.exports = function render(news, { results } = {}) {
+	module.exports = function render(news) {
+	    var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+	        results = _ref2.results;
+
 	    animateNews(news, results.map(buildNode));
 	};
-
 
 /***/ }
 /******/ ]);
