@@ -53,19 +53,28 @@
 
 	'use strict';
 
-	/* eslint no-console: 0 */
-	__webpack_require__(2); // babel required
+	__webpack_require__(2);
+
 	__webpack_require__(6);
+
 	__webpack_require__(9);
 
-	var firstLoad = __webpack_require__(10);
-	var render = __webpack_require__(12);
+	var _newsLoader = __webpack_require__(10);
+
+	var _newsLoader2 = _interopRequireDefault(_newsLoader);
+
+	var _render = __webpack_require__(12);
+
+	var _render2 = _interopRequireDefault(_render);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	window.onload = function () {
 	    var news = document.getElementsByClassName('news-container')[0];
 
-	    firstLoad.then(render.bind(undefined, news)).catch(console.log);
-	};
+	    _newsLoader2.default.then(_render2.default.bind(undefined, news)).catch(console.log);
+	}; /* eslint no-console: 0 */
+	/* eslint import/no-unresolved: 0 */
 
 /***/ },
 /* 2 */
@@ -450,7 +459,7 @@
 
 
 	// module
-	exports.push([module.id, "* {\n  box-sizing: border-box;\n}\nhtml {\n  background: #e5eff1;\n}\n.news-container {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  margin: 0 auto;\n  max-width: 1200px;\n}\n.news-container:empty:before {\n  content: '';\n  display: block;\n  width: 800px;\n  height: 800px;\n  margin: 0 auto;\n  background: url(" + __webpack_require__(8) + ");\n}\n.news-container .news-item {\n  display: flex;\n  flex-direction: row;\n  background: #808080;\n  border: 1px solid #000;\n  margin: 5px;\n  animation: news 400ms;\n  width: calc(33.333% - 10px);\n}\n.news-container .news-item .news-image {\n  width: 150px;\n  height: 150px;\n}\n.news-container .news-item .news-info {\n  padding: 10px;\n  display: flex;\n}\n.news-container .news-item .news-info .news-title {\n  color: #000;\n  text-decoration: none;\n}\n.news-container .news-item .news-info .news-title:hover {\n  text-decoration: underline;\n}\n@media (max-width: 1130px) {\n  .news-container .news-item {\n    width: calc(50% - 10px);\n  }\n}\n@media (max-width: 760px) {\n  .news-container .news-item {\n    width: 100%;\n  }\n}\n@-moz-keyframes news {\n  from {\n    transform: translate(10px, 10px);\n  }\n  to {\n    transform: translate(0, 0);\n  }\n}\n@-webkit-keyframes news {\n  from {\n    transform: translate(10px, 10px);\n  }\n  to {\n    transform: translate(0, 0);\n  }\n}\n@-o-keyframes news {\n  from {\n    transform: translate(10px, 10px);\n  }\n  to {\n    transform: translate(0, 0);\n  }\n}\n@keyframes news {\n  from {\n    transform: translate(10px, 10px);\n  }\n  to {\n    transform: translate(0, 0);\n  }\n}\n", ""]);
+	exports.push([module.id, "* {\n  box-sizing: border-box;\n}\nhtml {\n  background: #e5eff1;\n}\n.news-container {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  margin: 0 auto;\n  max-width: 1200px;\n}\n.news-container:empty:before {\n  content: '';\n  display: block;\n  width: 800px;\n  height: 800px;\n  margin: 0 auto;\n  background: url(" + __webpack_require__(8) + ");\n}\n.news-container .news-item {\n  display: flex;\n  flex-direction: row;\n  background: #808080;\n  border: 1px solid #000;\n  margin: 5px;\n  animation: news 400ms;\n  width: calc(33.333% - 10px);\n}\n.news-container .news-item .news-image {\n  width: 150px;\n  height: 150px;\n}\n.news-container .news-item .news-info {\n  padding: 10px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.news-container .news-item .news-info .news-title {\n  color: #000;\n  text-decoration: none;\n}\n.news-container .news-item .news-info .news-title:hover {\n  text-decoration: underline;\n}\n.news-container .news-item .news-info .news-date {\n  font-size: 12px;\n  align-self: flex-end;\n}\n@media (max-width: 1130px) {\n  .news-container .news-item {\n    width: calc(50% - 10px);\n  }\n}\n@media (max-width: 760px) {\n  .news-container .news-item {\n    width: 100%;\n  }\n}\n@-moz-keyframes news {\n  from {\n    transform: translate(10px, 10px);\n  }\n  to {\n    transform: translate(0, 0);\n  }\n}\n@-webkit-keyframes news {\n  from {\n    transform: translate(10px, 10px);\n  }\n  to {\n    transform: translate(0, 0);\n  }\n}\n@-o-keyframes news {\n  from {\n    transform: translate(10px, 10px);\n  }\n  to {\n    transform: translate(0, 0);\n  }\n}\n@keyframes news {\n  from {\n    transform: translate(10px, 10px);\n  }\n  to {\n    transform: translate(0, 0);\n  }\n}\n", ""]);
 
 	// exports
 
@@ -473,13 +482,15 @@
 
 	'use strict';
 
-	var _require = __webpack_require__(11),
-	    URL = _require.URL,
-	    KEY = _require.KEY;
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 
-	var request = new Request(URL + '?api-key=' + KEY);
+	var _constants = __webpack_require__(11);
 
-	module.exports = Promise.resolve(fetch(request)).then(function (response) {
+	var request = new Request(_constants.URL + '?source=techcrunch&apiKey=' + _constants.KEY);
+
+	exports.default = Promise.resolve(fetch(request)).then(function (response) {
 	    return response.json();
 	});
 
@@ -488,11 +499,18 @@
 /***/ function(module, exports) {
 
 	module.exports = {
-		"URL": "https://api.nytimes.com/svc/topstories/v2/home.json",
-		"KEY": "a5274de2464646e89fe3e786ee943578",
+		"URL": "https://newsapi.org/v1/articles",
+		"KEY": "d96ee725d4df48c6a46d47961ad66a01",
 		"DEFAULT_IMAGE": {
 			"url": "http://deali.ru/wp-content/uploads/2016/02/no-image-150x150.png",
 			"caption": "No caption"
+		},
+		"DATE_OPTIONS": {
+			"year": "numeric",
+			"month": "numeric",
+			"day": "numeric",
+			"hour": "numeric",
+			"minute": "numeric"
 		}
 	};
 
@@ -502,14 +520,19 @@
 
 	'use strict';
 
-	var _require = __webpack_require__(11),
-	    DEFAULT_IMAGE = _require.DEFAULT_IMAGE;
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = render;
+
+	var _constants = __webpack_require__(11);
 
 	function buildNode(_ref) {
-	    var _ref$multimedia$ = _ref.multimedia[1],
-	        imagePreview = _ref$multimedia$ === undefined ? DEFAULT_IMAGE : _ref$multimedia$,
+	    var _ref$urlToImage = _ref.urlToImage,
+	        urlToImage = _ref$urlToImage === undefined ? _constants.DEFAULT_IMAGE : _ref$urlToImage,
 	        url = _ref.url,
-	        title = _ref.title;
+	        title = _ref.title,
+	        publishedAt = _ref.publishedAt;
 
 	    if (!url || !title) {
 	        return undefined;
@@ -518,10 +541,11 @@
 	    var image = document.createElement('img');
 	    var info = document.createElement('div');
 	    var href = document.createElement('a');
+	    var date = document.createElement('div');
 
 	    node.classList.add('news-item');
 
-	    image.src = imagePreview.url;
+	    image.src = urlToImage;
 	    image.classList.add('news-image');
 
 	    info.classList.add('news-info');
@@ -530,7 +554,11 @@
 	    href.innerText = title;
 	    href.classList.add('news-title');
 
+	    date.innerText = new Date(publishedAt).toLocaleString('en-EN', _constants.DATE_OPTIONS);
+	    date.classList.add('news-date');
+
 	    info.appendChild(href);
+	    info.appendChild(date);
 	    node.appendChild(image);
 	    node.appendChild(info);
 	    return node;
@@ -544,12 +572,12 @@
 	    });
 	}
 
-	module.exports = function render(news) {
+	function render(news) {
 	    var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-	        results = _ref2.results;
+	        articles = _ref2.articles;
 
-	    animateNews(news, results.map(buildNode));
-	};
+	    animateNews(news, articles.map(buildNode));
+	}
 
 /***/ }
 /******/ ]);
