@@ -1,9 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 module.exports = {
-    entry: {
-        app: ["./index.js"]
-    },
+    entry: [
+        "babel-polyfill",
+        "./index.js"
+    ],
     output: {
         path: "build/",
         publicPath: "build/",
@@ -25,7 +27,12 @@ module.exports = {
         }, {
             test: /\.js$/,
             exclude: /(node_modules|bower_components)/,
-            loaders: ['babel?presets[]=es2015', 'eslint-loader']
+            loader: 'babel',
+            query: {
+                presets: [
+                    'es2015'
+                ]
+            }
         }, {
             test: /\.svg$/,
             loader: 'svg-url-loader'
@@ -41,6 +48,9 @@ module.exports = {
         extensions: ['', '.css', '.js', '.styl', '.json', 'index.js']
     },
     plugins: [
+        new webpack.ProvidePlugin({
+            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+        }),
         new OpenBrowserPlugin({
             url: 'http://localhost:3000'
         })
