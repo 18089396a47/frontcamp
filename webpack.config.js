@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const TrueToFalsePlugin = require('./trueToFalsePlugin/trueToFalse.js');
 module.exports = {
     entry: [
         "babel-polyfill",
@@ -27,12 +28,7 @@ module.exports = {
         }, {
             test: /\.js$/,
             exclude: /(node_modules|bower_components)/,
-            loader: 'babel',
-            query: {
-                presets: [
-                    'es2015'
-                ]
-            }
+            loader: 'babel'
         }, {
             test: /\.svg$/,
             loader: 'svg-url-loader'
