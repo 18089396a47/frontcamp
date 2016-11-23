@@ -7,6 +7,10 @@ import './index.html';
 import firstLoad from './scripts/newsLoader';
 import render from './scripts/render';
 
+import json from './jsonLoader/jsonLoader!./test.json';
+
+console.log(json);
+
 window.onload = () => {
     const news = document.getElementsByClassName('news-container')[0];
 

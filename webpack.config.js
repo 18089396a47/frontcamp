@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const TrueToFalsePlugin = require('./trueToFalsePlugin/trueToFalse.js');
 module.exports = {
+    devtool: 'eval-source-map',
     entry: [
         "babel-polyfill",
         "./index.js"
