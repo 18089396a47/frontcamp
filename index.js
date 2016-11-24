@@ -11,10 +11,10 @@ import json from './jsonLoader/jsonLoader!./test.json';
 
 console.log(json);
 
-window.onload = () => {
-    const news = document.getElementsByClassName('news-container')[0];
+// window.onload = () => {
+const news = document.getElementsByClassName('news-container')[0];
 
-    firstLoad
-        .then(render.bind(this, news))
-        .catch(console.log);
-};
+firstLoad
+    .then(render.bind(this, news))
+    .catch(console.log);
+// };

@@ -6,7 +6,8 @@ module.exports = {
     devtool: 'eval-source-map',
     entry: [
         "babel-polyfill",
-        "./index.js"
+        "./app.js"
+        // "./index.js"
     ],
     output: {
         path: "build/",
