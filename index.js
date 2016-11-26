@@ -1,5 +1,6 @@
 /* eslint no-console: 0 */
 /* eslint import/no-unresolved: 0 */
+import 'babel-polyfill';
 import 'reset-css';
 import './styles';
 import './index.html';

@@ -1,13 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
-const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const TrueToFalsePlugin = require('./trueToFalsePlugin/trueToFalse.js');
 module.exports = {
-    devtool: 'eval-source-map',
+    devtool: 'source-map',
     entry: [
-        // "babel-polyfill",
         "./app.js"
-        // "./index.js"
     ],
     output: {
         path: "build/",
@@ -49,8 +46,13 @@ module.exports = {
         new webpack.ProvidePlugin({
             'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
         }),
-        new OpenBrowserPlugin({
-            url: 'http://localhost:3000'
-        })
+        new webpack.optimize.UglifyJsPlugin({
+            exclude: /node_modules/,
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.AggressiveMergingPlugin()
     ]
 };
