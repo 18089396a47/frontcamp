@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const TrueToFalsePlugin = require('./trueToFalsePlugin/trueToFalse.js');
 module.exports = {
-    devtool: 'eval-source-map',
+    devtool: 'source-map',
     entry: [
         // "babel-polyfill",
         "./app.js"
@@ -31,9 +31,6 @@ module.exports = {
             test: /\.js$/,
             exclude: /(node_modules|bower_components)/,
             loader: 'babel'
-        }, {
-            test: /\.svg$/,
-            loader: 'svg-url-loader'
         }, {
             test: /.*\.(gif|png|jpe?g|svg)$/i,
             loaders: [

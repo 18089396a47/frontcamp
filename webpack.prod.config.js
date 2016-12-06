@@ -29,9 +29,6 @@ module.exports = {
             exclude: /(node_modules|bower_components)/,
             loader: 'babel'
         }, {
-            test: /\.svg$/,
-            loader: 'svg-url-loader'
-        }, {
             test: /.*\.(gif|png|jpe?g|svg)$/i,
             loaders: [
               'file?hash=sha512&digest=hex&name=[hash].[ext]',

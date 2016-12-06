@@ -1,4 +1,9 @@
 /* eslint class-methods-use-this: 0 */
+import Singleton from './singleton';
+import checkNewsAction from '../scripts/actions/checkNewsAction';
+
+let store;
+
 class Command {
     doCommand() {
         throw new Error('Not Emplemented');
@@ -8,18 +13,17 @@ class Command {
     }
 }
 
-class ArrayCommand extends Command {
-    constructor(array, commandName, ...args) {
+class CheckCommand extends Command {
+    constructor(commandName, ...args) {
         super();
-        this.array = array;
         this.commandName = commandName;
         this.args = args;
     }
 
     doCommand() {
         switch (this.commandName) {
-        case 'push':
-            this.array.push(...this.args);
+        case 'check':
+            store.dispatch(checkNewsAction(this.args[0]));
             break;
         default:
             throw new Error(`Unexpected command ${this.commandName}`);
@@ -28,8 +32,8 @@ class ArrayCommand extends Command {
 
     undoCommand() {
         switch (this.commandName) {
-        case 'push':
-            this.args.forEach([].pop.bind(this.array));
+        case 'check':
+            store.dispatch(checkNewsAction(this.args[0]));
             break;
         default:
             throw new Error('Smth went wrong');
@@ -38,14 +42,14 @@ class ArrayCommand extends Command {
 }
 
 class User {
-    constructor(array) {
-        this.array = array;
+    constructor() {
         this.commands = [];
         this.position = 0;
+        store = new Singleton().store;
     }
 
     compute(commandName, ...args) {
-        const command = new ArrayCommand(this.array, commandName, ...args);
+        const command = new CheckCommand(commandName, ...args);
         command.doCommand();
         this.commands.splice(this.position);
         this.commands.push(command);

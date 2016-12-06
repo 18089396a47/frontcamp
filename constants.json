@@ -11,5 +11,9 @@
     "day": "numeric",
     "hour": "numeric",
     "minute": "numeric"
+  },
+  "TYPES": {
+    "ADD_NEWS": "ADD_NEWS",
+    "CHECK_NEWS": "CHECK_NEWS"
   }
 }
